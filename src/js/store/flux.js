@@ -10,7 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			loadStarWarsPeople: async () => {
 				try {
-					const response = await fetch('https://www.swapi.tech/api/people')
+					const response = await fetch('https://www.swapi.tech/api/people/')
 					const data = await response.json()
 					if (data?.message !== 'ok') throw Error
 
@@ -32,7 +32,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// Finish these functions!
 			loadStarWarsPlanets: async () => {
 				try {
-					const response = await fetch('https://www.swapi.tech/api/people')
+					const response = await fetch('https://www.swapi.tech/api/planets/')
 					const data = await response.json()
 					if (data?.message !== 'ok') throw Error
 
@@ -51,7 +51,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error(e)
 				}
 			},
-			loadStarWarsVehicles: async () => {},
+			loadStarWarsVehicles: async () => {
+				try {
+					const response = await fetch('https://www.swapi.tech/api/vehicles/')
+					const data = await response.json()
+					if (data?.message !== 'ok') throw Error
+
+					const promises = data.results.map(vehicles => fetch(vehicles.url))
+					const responses = await Promise.all(promises);
+					const finalizedData = await Promise.all(responses.map(response => response.json()));
+					const formattedData = finalizedData.map(response => {
+						return { 
+							description: response.result.description,
+							uid: response.result.uid,
+							...response.result.properties
+						}
+					})
+					setStore({ vehicles: formattedData })
+				} catch(e) {
+					console.error(e)
+				}
+			},
 		}
 	};
 };
