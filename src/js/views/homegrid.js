@@ -1,5 +1,8 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
+
+
+
 const HomeGrid = () => {
 	const { store } = useContext(Context);
     return (

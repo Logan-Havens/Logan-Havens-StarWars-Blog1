@@ -1,19 +1,5 @@
 const getState = ({ getStore, getActions, setStore }) => {
-	/*
-	//People
-	{
-		name: anakin
-		age: 22
-	}
-	//Planets
-	{
-
-	}
-	//Vehicles
-	{
-		model: 
-	}
-	*/
+	
 	return {
 		store: {
 			characters: [],
@@ -44,7 +30,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			// Finish these functions!
-			loadStarWarsPlanets: async () => {},
+			loadStarWarsPlanets: async () => {
+				try {
+					const response = await fetch('https://www.swapi.tech/api/people')
+					const data = await response.json()
+					if (data?.message !== 'ok') throw Error
+
+					const promises = data.results.map(planets => fetch(planets.url))
+					const responses = await Promise.all(promises);
+					const finalizedData = await Promise.all(responses.map(response => response.json()));
+					const formattedData = finalizedData.map(response => {
+						return { 
+							description: response.result.description,
+							uid: response.result.uid,
+							...response.result.properties
+						}
+					})
+					setStore({ planets: formattedData })
+				} catch(e) {
+					console.error(e)
+				}
+			},
 			loadStarWarsVehicles: async () => {},
 		}
 	};
