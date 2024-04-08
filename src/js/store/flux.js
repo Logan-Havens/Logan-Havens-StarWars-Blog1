@@ -20,12 +20,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			fetchPlanets: async () => {
 				const response = fetch ("https://www.swapi.tech/api/planets/")
 				const data = await response.json() 
-				setStore({planets: data.results})
+				setStore({planet: data.results})
 			},
 			fetchStarships: async () => {
 				const response = fetch ("https://www.swapi.tech/api/starships/")
 				const data = await response.json() 
-				setStore({people: data.results})
+				setStore({starship: data.results})
 			},
 			fetchPersonDetail: async (uid) => {
 				const response = await fetch('https://www.swapi.tech/api/people/${uid}')

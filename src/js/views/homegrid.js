@@ -10,9 +10,9 @@ const HomeGrid = () => {
            Home Grid Page
             <div>
                 <h1>Characters</h1>
-                {store.characters.map(character => (
+                {store.person.map(person => (
                 <div style={{ overflowX: 'auto', whiteSpace: 'nowrap', marginBottom: '10px' }}>
-                    {JSON.stringify(character)}
+                    {JSON.stringify(person)}
                 </div>
                 ))}
             </div>
@@ -23,7 +23,7 @@ const HomeGrid = () => {
             </div>
             <div>
                 <h1>Vehicles</h1>
-                {store.vehicles.map(vehicles => JSON.stringify(vehicles))}
+                {store.starship.map(starship => JSON.stringify(starship))}
             </div>
         </div>
     )
