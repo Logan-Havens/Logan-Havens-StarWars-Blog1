@@ -44,7 +44,7 @@ function PeopleCard() {
               alt={person.name}
               style={{ height: "30rem", width: "30rem" }}
             />
-            <Link to={`/CharacterDetail/` + person.uid}>Learn More</Link>
+            <Link to={`/PersonDetail/` + person.uid}>Learn More</Link>
             <button
               className={isFavorite ? "fas fa-heart" : "far fa-heart"}
               onClick={() => handleFavorites(person)}
