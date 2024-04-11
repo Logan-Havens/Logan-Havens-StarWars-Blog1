@@ -54,10 +54,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		},
 		fetchStarshipsDetail: async (uid) => {
-			const response = await fetch('https://www.swapi.tech/api/starships/${uid}')
+			const response = await fetch(`https://www.swapi.tech/api/starships/${uid}`)
+			if (!response.ok){
+				throw new Error ("failed to fetch starship details")
+			}
 			const data = await response.json();
-			console.log(data)
-			setStore({ currentStarship: data.response.properties});
+			console.log({data})
+			setStore({ currentStarship: data?.result?.properties});
+
 
 		},
 		addFavorites:(name, uid,type) => {

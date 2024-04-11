@@ -25,6 +25,7 @@ const Layout = () => {
 						<Route path="/" element={<HomeGrid />} />
 						<Route path="/person_details/:id" element={<PersonDetails />} />
 						<Route path="/planet_details/:id" element={<PlanetDetails />} />
+						<Route path="/starship_details/:id" element={<StarshipDetails />} />
 						<Route path="/demo" element={<Demo />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
 					</Routes>
