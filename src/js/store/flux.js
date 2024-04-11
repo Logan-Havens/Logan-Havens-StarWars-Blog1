@@ -44,10 +44,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		},
 		fetchPlanetDetail: async (uid) => {
-			const response = await fetch('https://www.swapi.tech/api/planets/${uid}')
+			const response = await fetch(`https://www.swapi.tech/api/planets/${uid}`)
+			if (!response.ok){
+				throw new Error ("failed to fetch planet details")
+			}
 			const data = await response.json();
-			console.log(data)
-			setStore({ currentPlanet: data.response.properties});
+			console.log({data})
+			setStore({ currentPlanet: data?.result?.properties});
 
 		},
 		fetchStarshipsDetail: async (uid) => {

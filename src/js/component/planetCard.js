@@ -35,7 +35,7 @@ function PlanetCard() {
               onError={(e) => {
                 e.target.src="https://starwars-visualguide.com/assets/img/placeholder.jpg"
               }}/>
-              <Link to={`/planetDetail/${planet.uid}`}>Learn More</Link>
+              <Link to={`/planet_details/${planet.uid}` + planet.uid}>Learn More</Link>
               <button className={isFavorite ? "fas fa-heart" : "far fa-heart"} onClick={() => handleFavorites(planet)}></button>
             </div>
           );
