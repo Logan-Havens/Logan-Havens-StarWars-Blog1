@@ -1,5 +1,9 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
+import StarshipScroller from "../component/starshipScroller";
+import PlanetScroller from "../component/planetScroller";
+import PeopleScroller from "../component/peopleScroller";
+
 
 const HomeGrid = () => {
     const { store } = useContext(Context);
@@ -7,17 +11,11 @@ const HomeGrid = () => {
     return (
         <div>
             <h1>Characters</h1>
-            {store.people && store.people.map(person => (
-                <div key={person.uid}>{JSON.stringify(person)}</div>
-            ))}
+            <PeopleScroller />
             <h1>Planets</h1>
-            {store.planets && store.planets.map(planet => (
-                <div key={planet.uid}>{JSON.stringify(planet)}</div>
-            ))}
+           <PlanetScroller />
             <h1>Vehicles</h1>
-            {store.starships && store.starships.map(starship => (
-                <div key={starship.uid}>{JSON.stringify(starship)}</div>
-            ))}
+           <StarshipScroller /> 
         </div>
     );
 };

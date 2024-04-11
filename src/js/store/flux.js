@@ -13,25 +13,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			fetchPeople: async () => {
-				const response = fetch ("https://www.swapi.tech/api/people/")
-				const data = await response.json() 
+				const response = await fetch ("https://www.swapi.tech/api/people/")
+				let data = await response.json();
+				console.log(data)
 				setStore({people: data.results})
+	
 			},
 			fetchPlanets: async () => {
-				const response = fetch ("https://www.swapi.tech/api/planets/")
-				const data = await response.json() 
-				setStore({planet: data.results})
+				const response = await fetch ("https://www.swapi.tech/api/planets/")
+				let data = await response.json();
+				console.log(data)
+				setStore({planets: data.results})
+	
 			},
 			fetchStarships: async () => {
-				const response = fetch ("https://www.swapi.tech/api/starships/")
-				const data = await response.json() 
-				setStore({starship: data.results})
+				const response = await fetch ("https://www.swapi.tech/api/starships/")
+				let data = await response.json();
+				console.log(data)
+				setStore({starships: data.results})
+	
 			},
 			fetchPersonDetail: async (uid) => {
 				const response = await fetch('https://www.swapi.tech/api/people/${uid}')
+				if (!response.ok){
+					throw new Error ("failed to fetch person details")
+				}
 				const data = await response.json();
 				console.log(data)
 				setStore({ currentPerson: data.response.properties});
+
 		},
 		fetchPlanetDetail: async (uid) => {
 			const response = await fetch('https://www.swapi.tech/api/planets/${uid}')

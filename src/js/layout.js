@@ -9,7 +9,7 @@ import { Navbar } from "./component/navbar";
 import HomeGrid from './views/homegrid';
 import PersonDetails from './views/personDetails'
 import PlanetDetails from './views/planetDetails'
-
+import StarshipDetails from './views/StarshipDetails'
 //create your first component
 const Layout = () => {
 	//the basename is used when your project is published in a subdirectory and not in the root of the domain

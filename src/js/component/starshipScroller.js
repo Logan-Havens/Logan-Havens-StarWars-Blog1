@@ -1,15 +1,15 @@
 import React from "react";
-import StarshipCard from "./StarshipCard";
+import StarshipCard from "./StarshipCard.js";
 import "../../styles/home.css";
-const starshipScroller = () => {
+const StarshipScroller = () => {
   return (
     <div className="container">
       <div className="">
         <div className="">
-          <starshipCard />
+          <StarshipCard />
         </div>
       </div>
     </div>
   );
 };
-export default starshipScroller;
+export default StarshipScroller;

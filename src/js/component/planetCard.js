@@ -31,7 +31,10 @@ function PlanetCard() {
           return (
             <div key={index} className="card col-1 mx-1" style={{ width: "30rem", height: "48rem" }}>
               <h3>{planet.name}</h3>
-              <img src={`https://starwars-visualguide.com/assets/img/planets/${planet.uid}.jpg`} className="card-img-top" alt={planet.name} style={{ height: "30rem", width: "30rem" }} />
+              <img src={`https://starwars-visualguide.com/assets/img/planets/${planet.uid}.jpg`} className="card-img-top" alt={planet.name} style={{ height: "30rem", width: "30rem" }}  
+              onError={(e) => {
+                e.target.src="https://starwars-visualguide.com/assets/img/placeholder.jpg"
+              }}/>
               <Link to={`/planetDetail/${planet.uid}`}>Learn More</Link>
               <button className={isFavorite ? "fas fa-heart" : "far fa-heart"} onClick={() => handleFavorites(planet)}></button>
             </div>

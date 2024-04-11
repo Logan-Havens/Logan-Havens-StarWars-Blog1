@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/home.css";
 import { Context } from "../store/appContext";
+
 function PeopleCard() {
   const { store, actions } = useContext(Context);
   const [people, setPeople] = useState([]);
@@ -21,6 +22,7 @@ function PeopleCard() {
       actions.addFavorites(person.name, person.id, "character");
     }
   };
+
   return (
     <div
       className="d-flex col-10 overflow-auto mt-5 mx-auto cards"
@@ -31,6 +33,7 @@ function PeopleCard() {
         const isFavorite = store.favorites.some(
           (fav) => fav.uid === person.uid && fav.type === "character"
         );
+
         return (
           <div
             key={index}
@@ -42,9 +45,12 @@ function PeopleCard() {
               src={`https://starwars-visualguide.com/assets/img/characters/${person.uid}.jpg`}
               className="card-img-top"
               alt={person.name}
-              style={{ height: "30rem", width: "30rem" }}
+              style={{ height: "30rem", width: "30rem" }} 
+              onError={(e) => {
+                e.target.src="https://starwars-visualguide.com/assets/img/placeholder.jpg"
+              }}
             />
-            <Link to={`/PersonDetail/` + person.uid}>Learn More</Link>
+            <Link to={`/person_details/` + person.uid}>Learn More</Link>
             <button
               className={isFavorite ? "fas fa-heart" : "far fa-heart"}
               onClick={() => handleFavorites(person)}

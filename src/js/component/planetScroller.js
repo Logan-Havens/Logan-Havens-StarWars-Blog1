@@ -1,15 +1,15 @@
 import React from "react";
-import planetCard from "./planetCard";
+import PlanetCard from "./planetCard";
 import "../../styles/home.css";
-const planetScroller = () => {
+const PlanetScroller = () => {
   return (
     <div className="container">
       <div className="">
         <div className="">
-          <planetCard />
+          <PlanetCard />
         </div>
       </div>
     </div>
   );
 };
-export default planetScroller;
+export default PlanetScroller;

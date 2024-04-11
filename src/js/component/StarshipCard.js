@@ -30,7 +30,10 @@ function StarshipCard() {
         return (
           <div key={index} className="card col-1 mx-1" style={{ width: "30rem", height: "48rem" }}>
             <h3>{starship.name}</h3>
-            <img src={`https://starwars-visualguide.com/assets/img/starships/${starship.uid}.jpg`} className="card-img-top" alt={starship.name} style={{ height: "30rem", width: "30rem" }} />
+            <img src={`https://starwars-visualguide.com/assets/img/starships/${starship.uid}.jpg`} className="card-img-top" alt={starship.name} style={{ height: "30rem", width: "30rem" }} 
+             onError={(e) => {
+              e.target.src="https://starwars-visualguide.com/assets/img/placeholder.jpg"
+            }}/>
             <Link to={`/starshipDetail/${starship.uid}`}>Learn More</Link>
             <button className={isFavorite ? "fas fa-heart" : "far fa-heart"} onClick={() => handleFavorites(starship)}></button>
           </div>
