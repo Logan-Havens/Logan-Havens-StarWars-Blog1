@@ -50,7 +50,7 @@ function PeopleCard() {
                 e.target.src="https://starwars-visualguide.com/assets/img/placeholder.jpg"
               }}
             />
-            <Link to={`/person_details/` + person.uid}>Learn More</Link>
+            <Link to={`/person_details/${person.uid}` + person.uid}>Learn More</Link>
             <button
               className={isFavorite ? "fas fa-heart" : "far fa-heart"}
               onClick={() => handleFavorites(person)}

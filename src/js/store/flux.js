@@ -34,13 +34,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 	
 			},
 			fetchPersonDetail: async (uid) => {
-				const response = await fetch('https://www.swapi.tech/api/people/${uid}')
+				const response = await fetch(`https://www.swapi.tech/api/people/${uid}`)
 				if (!response.ok){
 					throw new Error ("failed to fetch person details")
 				}
 				const data = await response.json();
-				console.log(data)
-				setStore({ currentPerson: data.response.properties});
+				console.log({data})
+				setStore({ currentPerson: data?.result?.properties});
 
 		},
 		fetchPlanetDetail: async (uid) => {

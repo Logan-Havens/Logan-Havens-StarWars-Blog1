@@ -1,20 +1,25 @@
 import React, { useContext,useEffect } from "react";
 import { Context } from "../store/appContext";
-const Details = ({uid}) => {
+import {useParams} from "react-router-dom";
+
+const Details = () => {
 	const { store, actions } = useContext(Context);
+    const {id} = useParams ()
 
     useEffect(() => {
-        actions.fetchPersonDetail(uid);
-      }, [uid, actions]);
-  
+    fetchPerson()
+      }, []);
+      const fetchPerson = async () => {
+        const person =  await actions.fetchPersonDetail(id);
+        console.log({person,id})
+      }
     return (
         <div>
            Person Details Page
-           { store.currentPerson && (
-            <div>{store.currentPerson.name}</div>
+          
+            <div>{store?.currentPerson?.name || " "}</div>
 
-           )
-           }
+        
         </div>
     )
 }
