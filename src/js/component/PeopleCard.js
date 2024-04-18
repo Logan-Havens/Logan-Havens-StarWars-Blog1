@@ -15,11 +15,11 @@ function PeopleCard() {
   }, [store.people]);
   // Handling the favorites toggle
   const handleFavorites = (person) => {
-    const isFavorite = store.favorites.some((fav) => fav.id === person.id);
+    const isFavorite = store.favorites.some((fav) => fav.uid === person.uid && fav.type === "character");
     if (isFavorite) {
       actions.removeFavorites(person.name); // Make sure this correctly identifies the person to remove
     } else {
-      actions.addFavorites(person.name, person.id, "character");
+      actions.addFavorites(person.name, person.uid, "character");
     }
   };
 
@@ -50,7 +50,7 @@ function PeopleCard() {
                 e.target.src="https://starwars-visualguide.com/assets/img/placeholder.jpg"
               }}
             />
-            <Link to={`/person_details/${person.uid}` + person.uid}>Learn More</Link>
+            <Link to={`/person_details/${person.uid}`}>Learn More</Link>
             <button
               className={isFavorite ? "fas fa-heart" : "far fa-heart"}
               onClick={() => handleFavorites(person)}
