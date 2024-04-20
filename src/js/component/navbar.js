@@ -1,26 +1,68 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "../../styles/home.css";
+import { Context } from "../store/appContext";
 
 export const Navbar = () => {
-	return (		
-<nav className="navbar navbar-expand-lg navbar-light bg-light">
-  <div className="container-fluid">
-  	<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/2560px-Star_Wars_Logo.svg.png" alt="" width="100" height="60" />
-    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-        <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a className="dropdown-item" href="#">Action</a></li>
-            <li><a className="dropdown-item" href="#">Another action</a></li>
-            <li><a className="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-      </ul>
+  const {store, actions } = useContext (Context);
+  const [favorites, setFavorites] = useState ([]);
+
+ useEffect (() => {
+  setFavorites(store.favorites);
+
+ }, [store.favorites]);
+
+ return (
+  <nav className="navbar bg-body-tertiary">
+    <div className="container-fluid">
+      <Link to="/">
+        <span className="navbar-brand mb-0 h1">Home</span>
+      </Link>
+      <form className="d-flex" role="search">
+        <input
+          className="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button className="btn btn-outline-success" type="submit">
+          Search
+        </button>
+      </form>
+      <div className="dropdown">
+        <button
+          className="btn btn-secondary dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Favorites
+        </button>
+        <ul className="dropdown-menu">
+          {favorites?.map((favorite) => {
+            return (
+              <li key={favorite.id}>
+                {favorite.type === "character" && (
+                  <Link to={`/CharacterDetails/${favorite.id}`}>
+                    {favorite.name}
+                  </Link>
+                )}
+                {favorite.type === "starship" && (
+                  <Link to={`/StarshipDetails/${favorite.id}`}>
+                    {favorite.name}
+                  </Link>
+                )}
+                {favorite.type === "planet" && (
+                  <Link to={`/PlanetDetails/${favorite.id}`}>
+                    {favorite.name}
+                  </Link>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
-	);
+  </nav>
+);
 };

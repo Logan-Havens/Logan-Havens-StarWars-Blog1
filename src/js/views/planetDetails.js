@@ -7,21 +7,29 @@ const Details = () => {
     const {id} = useParams ()
 
     useEffect(() => {
-    fetchPlanets()
+    fetchPlanet()
       }, []);
-      const fetchPlanets = async () => {
+      const fetchPlanet = async () => {
         const planet =  await actions.fetchPlanetDetail(id);
         console.log({planet,id})
       }
     return (
-        <div>
-           Planet Details Page
-          
-            <div>{store?.currentPlanet?.name || " "}</div>
-
-        
-        </div>
-    )
+      <div className="card mt-5" style={{ width: "30rem", margin: "auto" }}>
+      {true? (<><img
+        src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
+        className="card-img-top"
+        alt={name}
+        style={{ height: "30rem" }}
+      />
+      <div className="card-body">
+        <h1 className="card-title">{store.currentPlanet.name}</h1>
+        <p className="card-text">Population: {store.currentPlanet.population}</p>
+        <p className="card-text">Terrain: {store.currentPlanet.terrain}</p>
+        <p className="card-text">diameter: {store.currentPlanet.diameter}</p>
+        <p className="card-text">Rotation Time: {store.currentPlanet.rotation_period}</p>
+      </div></>) : (<div>Loading...</div>)}
+    </div>
+  );   
 }
 
 export default Details
